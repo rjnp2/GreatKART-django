@@ -111,14 +111,63 @@ Work on this project.
 	- Review Order Payment Page
 
 16. Payment Gateway Integration & Place Order
-		
+	- Create PayPal Business Account
+	- PayPal Payment Gateway with Sandbox Account & Place Order
+	- Send Transaction Details to Backend	
 	
 17. After Order Functionalities
-18. Review and Rating System
-19. Two Factor Checks for Submitting Reviews (Login check & Product purchase check)
-20. Rating Average & Review Count Calculation
-21. My Account Functionalities
-22. Product Gallery with Unlimited Images
-23. Django Security Measures
-24. Deploying Application on AWS Elastic Beanstalk (EB)
+	- Move Cart Items to Order Product Table
+	- Set Variations to Ordered Products
+	- Reduce Quantity of Sold Products and Clear the Cart
+	- Send Order Received Email
+	- Redirect the User to Order Completed Page
+	- Generate Invoice on Order Completion
+	- Push Code
 
+18. Review and Rating System
+	- Review & Rating Model
+	- Making Rating Stars 01
+	- Making Rating Stars Applying CSS 02
+	- Store the Rating & Reviews
+	
+19. Two Factor Checks for Submitting Reviews (Login check & Product purchase check)
+	- Check if the User has purchased the Product before submitting Review
+	- Displaying Rating Stars
+	
+20. Rating Average & Review Count Calculation
+	- Rating Average Calculation
+	- Rating Average Stars & Review Counter
+	- Anonymous User Error Fix
+	- Push Code
+	
+21. My Account Functionalities
+	- Dashboard Edits
+	- My Orders
+	- User Profile Model
+	- Edit Profile Setup
+	- Edit Profile Functionality
+	- Automatically Create User Profile
+	- Change Password
+	- Order Detail Page
+	- Fix Profile Picture in Dashboard
+	
+22. Product Gallery with Unlimited Images
+	- Product Gallery Model with Image Preview
+	- Product Gallery Implementation – Unlimited Product Images
+	- Show Rating Stars on Homepage
+	
+23. Django Security Measures
+	- Store Your Website’s Sensitive Information Securely
+	- Secure your Admin panel & Record Hacking Attempts
+	- Automatically logout after Inactivity
+	
+24. Deploying Application on AWS Elastic Beanstalk (EB)
+	- AWS Elastic Beanstalk Deployment Introduction
+	- Amazon AWS Account Creation
+	- Deploy your Application on AWS Elastic Beanstalk (AWS EB)
+	- AWS RDS Postgres Configuration
+	- Postgres Installation and Load data from Sqlite3 to Postgres
+	- AWS S3 Bucket for Static & Media Files Storage
+	- Deploying the Application again for S3 Changes
+	- Connect Custom Domain
+	- Installing SSL Certificate on AWS Elastic Beanstalk
