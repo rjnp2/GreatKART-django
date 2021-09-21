@@ -89,9 +89,30 @@ Work on this project.
 	- Dashboard
 
 13. Forgot Password with Secure Validation Links
+	- Forgot Password
+	- Reset Password Validation
+	- Push Code to GitHub
+
 14. Cart Checkout, automatically assign the Cart Items to Logged-in User
+	- Checkout Page Design
+	- Assign the User to Cart Item
+	- Modify Cart Counter & Cart View to Handle Logged-in Users
+	- Variation Grouping for Logged-in Users Part1
+	- Variation Grouping for Logged-in Users Part2
+	- Fix Remove & Cart Decrement Functions
+	- Dynamically Redirect the User to Next Page	
+	
 15. Orders & Order Number Generation
+	- Order Flow Explained
+	- Making Order Model, Order Product model and Payment Model
+	- Place Order View and Generate Order Number Part 01
+	- Place Order View and Generate Order Number Part 02
+	- Review Order Page Setup
+	- Review Order Payment Page
+
 16. Payment Gateway Integration & Place Order
+		
+	
 17. After Order Functionalities
 18. Review and Rating System
 19. Two Factor Checks for Submitting Reviews (Login check & Product purchase check)
