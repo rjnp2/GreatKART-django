@@ -9,8 +9,13 @@ def counter(request):
     
     else:
         try:
-            cart  = Cart.objects.get(cart_id = _cart_id(request))
-            cart_items = CartItem.objects.all().filter(cart_id= cart)
+
+            if request.user.is_authenticated:
+                cart_items = CartItem.objects.all().filter(user= request.user)
+
+            else:
+                cart  = Cart.objects.get(cart_id = _cart_id(request))
+                cart_items = CartItem.objects.all().filter(cart_id= cart)
 
             for cart_item in cart_items:
                 cart_counter += cart_item.quantity
