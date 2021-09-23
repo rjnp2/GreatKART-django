@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-content padding-y bg">
+	<div class="container">
+		<!-- ============================ COMPONENT 2 ================================= -->
+		<div class="row">
+			<main class=" container col-md-7">
+				<article class="card mb-4">
+					<div class="card-body">
+						<h4 class="card-title mb-4">Review cart</h4>
+						<div class="row">
+							{% for cart_item in cart_items %}
+							<div class="col-md-6">
+								<figure class="itemside  mb-4">
+									<div class="aside"><img src="{{ cart_item.product_id.prod_images.url }}"
+											class="border img-sm"></div>
+									<figcaption class="info">
+										<a href="{% url 'product_detail' cart_item.product_id.category.slug cart_item.product_id.slug %}"
+											class="title text-dark">{{ cart_item.product_id.product_name}}</a>
+										<span class="text-muted">{{cart_item.quantity }} X = ${{ cart_item.sub_total }}
+										</span>
+									</figcaption>
+								</figure>
+							</div> <!-- col.// -->
+							{%endfor%}
+						</div> <!-- row.// -->
+					</div> <!-- card-body.// -->
+				</article> <!-- card.// -->
+
+				<article class="card mb-4">
+					<div class="card-body">
+						<h4 class="card-title mb-4">Billing Address info</h4>
+						<div class="">
+							<div class="form-group col-sm-6">
+								<p>Name: {{order.full_name| capfirst}}</p>
+							</div>
+							<div class="form-group col-sm-6">
+								<p>Phone No.: {{order.phone}}</p>
+							</div>
+							<div class="form-group col-sm-6">
+								<p>Email: {{order.email}}</p>
+							</div>
+							<div class="form-group col-sm-6">
+								<p>Address Line 1: {{order.address_line_1}}</p>
+							</div>
+							{% if order.address_line_2%}
+							<div class="form-group col-sm-6">
+								<p>Address Line 2: {{order.address_line_2}}</p>
+							</div>
+							{% endif %}
+							<div class="form-group col-sm-6">
+								<p>Address: {{order.address}}</p>
+							</div>
+							{% if order.order_note%}
+							<div class="form-group col-sm-6">
+								<p>Order Note: {{order.order_note}}</p>
+							</div>
+							{% endif %}
+						</div> <!-- row.// -->
+					</div> <!-- card-body.// -->
+				</article> <!-- card.// -->
+
+			</main> <!-- col.// -->
+
+			<main class=" container col-md-5">
+				<article class="accordion" id="accordion_pay">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title mb-4">Payment Method</h4>
+							<dl class="dlist-align">
+								<dt>Total price:</dt>
+								<dd class="text-right">${{total}}</dd>
+							</dl>
+							<dl class="dlist-align">
+								<dt>Tax:</dt>
+								<dd class="text-right"> ${{tax}}</dd>
+							</dl>
+							<dl class="dlist-align">
+								<dt>Total:</dt>
+								<dd class="text-right text-dark b"><strong>${{grand_total}}</strong></dd>
+							</dl>
+						</div>
+					</div>
+					<div class="card">
+
+						<header class="card-header">
+							<img src="{% static './images/misc/payment-paypal.png'%}" class="float-right" height="24">
+							<label class="form-check collapsed" data-toggle="collapse" data-target="#pay_paynet">
+								<input class="form-check-input" name="payment-option" checked type="radio"
+									value="option2">
+								<h6 class="form-check-label">
+									Paypal
+								</h6>
+							</label>
+						</header>
+						<div id="pay_paynet" class="collapse show" data-parent="#accordion_pay">
+							<div class="card-body">
+								<p class="text-center text-muted">Connect your PayPal account and use it to
+									pay your
+									bills. You'll be redirected to PayPal to add your billing information.
+								</p>
+								<div id="paypal-button-container">
+								</div>
+								<br><br>
+								</p>
+							</div> <!-- card body .// -->
+						</div> <!-- collapse .// -->
+
+						<div class="card">
+							<header class="card-header">
+								<img src="{% static './images/misc/payment-card.png' %}" class="float-right"
+									height="24">
+								<label class="form-check" data-toggle="collapse" data-target="#pay_payme">
+									<input class="form-check-input" name="payment-option" type="radio" value="option2">
+									<h6 class="form-check-label"> Credit Card </h6>
+								</label>
+							</header>
+							<div id="pay_payme" class="collapse" data-parent="#accordion_pay">
+								<div class="card-body">
+									<p class="alert alert-success">Some information or instruction</p>
+									<form class="form-inline">
+										<input type="text" class="form-control mr-2" placeholder="xxxx-xxxx-xxxx-xxxx"
+											name="">
+										<input type="text" class="form-control mr-2" style="width: 100px"
+											placeholder="dd/yy" name="">
+										<input type="number" maxlength="3" class="form-control mr-2"
+											style="width: 100px" placeholder="cvc" name="">
+										<button class="btn btn btn-success">Button</button>
+									</form>
+								</div> <!-- card body .// -->
+							</div> <!-- collapse .// -->
+						</div> <!-- card.// -->
+					</div> <!-- card.// -->
+				</article>
+				<!-- accordion end.// -->
+
+			</main> <!-- col.// -->
+		</div> <!-- row.// -->
+
+		<!-- ============================ COMPONENT 2 END//  ================================= -->
+
+	</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+<script>
+	var amount = "{{ grand_total }}";
+	var url = "{% url 'payments' %}";
+	var redirect_url = "{% url 'order_complete' %}";
+	var orderID = "{{ order.order_number }}";
+	var payment_method = 'Paypal';
+
+	function getCookie(name) {
+		let cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+			const cookies = document.cookie.split(';');
+			for (let i = 0; i < cookies.length; i++) {
+				const cookie = cookies[i].trim();
+				// Does this cookie string begin with the name we want?
+				if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
+				}
+			}
+		}
+		return cookieValue;
+	}
+
+	var csrftoken = getCookie('csrftoken');
+
+	// Render the PayPal button into #paypal-button-container
+	paypal.Buttons({
+
+		// Set up the transaction
+		createOrder: function (data, actions) {
+			return actions.order.create({
+				purchase_units: [{
+					amount: {
+						value: amount
+					}
+				}]
+			});
+		},
+
+		// Finalize the transaction
+		onApprove: function (data, actions) {
+			return actions.order.capture().then(function (orderData) {
+				// Successful capture! For demo purposes:
+
+				var transaction = JSON.stringify(orderData, null, 2);
+				var tranID = orderData['id'];
+				var status = orderData['status'];
+
+				// Example POST method implementation:
+				function postData() {
+					// Default options are marked with *
+					fetch(url,
+						{
+							method: 'POST',
+							credentials: 'same-origin',
+							headers: {
+								'Accept': 'application/json',
+								'X-CSRFToken': csrftoken,
+							},
+							body: JSON.stringify({
+								'orderID': orderID,
+								'tranID': tranID,
+								'payment_method': payment_method,
+								'amount_paid': amount,
+								'status': status
+							}) // body data type must match "Content-Type" header
+						})
+						.then(response => response.json())
+						.then(data => {
+							window.location.href = redirect_url +'?order_number=' + data.order_no +'&payment_id='+data.tranID;
+						});
+				}
+				postData()
+			});
+		}
+	}).render('#paypal-button-container');
+</script>
+{% endblock %}

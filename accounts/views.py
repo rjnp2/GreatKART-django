@@ -177,7 +177,7 @@ def forgetpassword(request):
             current_site = get_current_site(request)
             mail_subject = 'Please change your password'
 
-            message = render_to_string('account/forget_password_email.html',
+            message = render_to_string('order/forget_password_email.html',
                         { 'user': user,
                         'domain': current_site ,
                         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
