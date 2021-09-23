@@ -62,7 +62,7 @@ def place_order(request):
             mt = int(datetime.date.today().strftime("%m"))
             dy = int(datetime.date.today().strftime("%d"))
             date = datetime.date(yr,mt,dy)
-            id = date.strftime("%Y%M%D") + str(order.id)
+            id = date.strftime("%Y%m%d") + str(order.id)
             order.order_number = id
             order.save()
 

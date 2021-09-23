@@ -1,5 +1,5 @@
 from django import forms
-from .models import Account
+from .models import Account, UserProfile
 
 class RegistrationForm(forms.ModelForm):
 
@@ -45,3 +45,50 @@ class RegistrationForm(forms.ModelForm):
                 "Password  and Confirm Password doesn't match"
             )
 
+class UserForm(forms.ModelForm):
+
+    class Meta:
+        model = Account
+        fields = ['first_name', 'last_name', 'phone_no']
+
+    def __init__(self, *args, **kwargs):
+
+        super(UserForm, self).__init__(*args, **kwargs)
+
+        for field in self.fields:
+            placehold = field.split('_')
+
+            try:
+                placehold = 'Enter ' +placehold[0] + ' ' + placehold[1]
+            except:
+                placehold = 'Enter '  + placehold[0]
+
+            self.fields[field].widget.attrs={
+                'placeholder': placehold,
+                'class' : 'form-control'}
+
+
+class UserProfileForm(forms.ModelForm):
+
+    profile_pics = forms.ImageField(required=False, error_messages = {'invalid': {"Image File Only"}},
+                        widget= forms.FileInput)
+
+    class Meta:
+        model = UserProfile
+        fields = ['address_line_1', 'address_line_2', 'profile_pics','city','state','country']
+
+    def __init__(self, *args, **kwargs):
+
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+
+        for field in self.fields:
+            placehold = field.split('_')
+
+            try:
+                placehold = 'Enter ' +placehold[0] + ' ' + placehold[1]
+            except:
+                placehold = 'Enter '  + placehold[0]
+
+            self.fields[field].widget.attrs={
+                'placeholder': placehold,
+                'class' : 'form-control'}

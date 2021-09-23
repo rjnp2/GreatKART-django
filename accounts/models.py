@@ -48,7 +48,7 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(max_length=50)
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(max_length=50, unique=True)
-    phone_no = models.CharField(max_length=15)
+    phone_no = models.CharField(max_length=15,blank=True)
 
     # required
 
@@ -75,3 +75,18 @@ class Account(AbstractBaseUser):
     
     def has_module_perms(self,add_label):
         return True
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(Account, on_delete = models.CASCADE)
+    address_line_1 = models.CharField(max_length=100, blank=True)
+    address_line_2 = models.CharField(max_length=100, blank=True)
+    profile_pics = models.ImageField(blank=True, upload_to='pics/profile_pics')
+    city = models.CharField(max_length=20, blank=True)
+    state = models.CharField(max_length=20, blank=True)
+    country = models.CharField(max_length=20, blank=True)
+
+    def __str__(self):
+        return self.user.first_name
+
+    def full_address(self):
+        return f'{self.address_line_1} {address_line_2}'
