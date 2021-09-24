@@ -1,3 +1,7 @@
+# Demo
+![deepin-screen-recorder_google-chrome_20210924125618](https://user-images.githubusercontent.com/58425689/134633900-871e17ce-a3dd-4efd-bbdd-a0bb44621af8.gif)
+
+# Commands
 django-admin startproject project_name
 
 python manage.py runserver
@@ -12,7 +16,7 @@ python manage.py makemigrations
 
 python manage.py collectstatic
 
-Work on this project.
+# Work on this project.
 
 1. Django Custom User Model, Category & Media Files 
 	- create Category Model
