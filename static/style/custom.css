@@ -35,3 +35,24 @@ input:checked + label:hover, input:checked ~ label:hover,
 input:checked  ~ label:hover ~ label, label:hover ~ input:checked ~ label{
     color: #cc9000;
 }
+
+.thumb{
+    margin: 0 auto;
+    padding: 0;
+    float: left;
+}
+
+.thumb li{
+    margin: 10px;
+    list-style: none;
+}
+
+.thumb li img{
+    width: 88px;
+    height: 80px;
+    border: 2px solid grey ;
+}
+
+.rating-star i{
+    color: #ffb100;
+}

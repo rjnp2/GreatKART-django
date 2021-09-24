@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import Account, UserProfile
 from django.utils.html import format_html
+import admin_thumbnails
 
 class AccountAdmin(UserAdmin):
     list_display = ['email','username', 'first_name','last_name','last_login',
@@ -15,6 +16,7 @@ class AccountAdmin(UserAdmin):
     list_filter = ()
     fieldsets = ()
 
+@admin_thumbnails.thumbnail('profile_pics')
 class UserProfileAdmin(admin.ModelAdmin):
 
     def thumbnail(self, object):
